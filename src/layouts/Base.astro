@@ -5,6 +5,8 @@ import "@fontsource/inter/latin-600.css";
 import "@fontsource/inter/latin-700.css";
 import "@fontsource/inter-tight/latin-600.css";
 import "@fontsource/inter-tight/latin-700.css";
+import interRegular from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import interTightBold from "@fontsource/inter-tight/files/inter-tight-latin-700-normal.woff2?url";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../config";
@@ -34,6 +36,8 @@ const plausible = site.analytics.plausibleDomain;
     <link rel="canonical" href={canonical.href} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#1F2A44" />
+    <link rel="preload" href={interTightBold} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interRegular} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
@@ -86,7 +90,7 @@ const plausible = site.analytics.plausibleDomain;
     --input-bg: #fffdf5;
     --font-body: Inter, system-ui, sans-serif;
     --font-display: "Inter Tight", Inter, system-ui, sans-serif;
-    --container: 1120px;
+    --container: 1168px; /* 1120 px de contenu + 2 × 24 px de marge */
   }
 
   @media (prefers-reduced-motion: no-preference) {

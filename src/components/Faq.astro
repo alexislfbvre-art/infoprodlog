@@ -46,7 +46,7 @@ const questions = [
     border-top: 1px solid var(--border);
   }
   .inner {
-    max-width: 820px;
+    max-width: 868px; /* 820 px de contenu + marges */
     margin: 0 auto;
     padding: 88px 24px;
   }
@@ -55,7 +55,7 @@ const questions = [
   }
   details {
     border-bottom: 1px solid var(--border);
-    padding: 18px 0;
+    padding: 10px 0;
   }
   details:last-of-type {
     border-bottom: 0;
@@ -64,27 +64,11 @@ const questions = [
     cursor: pointer;
     font-weight: 600;
     font-size: 18px;
+    padding: 8px 0;
     min-height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    list-style: none;
   }
-  summary::-webkit-details-marker {
-    display: none;
-  }
-  summary::after {
-    content: "+";
-    flex: 0 0 auto;
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--accent);
-    line-height: 1;
-  }
-  details[open] summary::after {
-    content: "−";
+  details[open] p {
+    margin-bottom: 8px;
   }
   p {
     margin: 12px 0 0;
