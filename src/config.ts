@@ -9,6 +9,10 @@ export const site = {
     address: "[ADRESSE OU DOMICILIATION]",
     vat: "[N° TVA INTRACOM OU « TVA non applicable, art. 293 B du CGI »]",
     host: "[HÉBERGEUR : raison sociale, adresse et téléphone, tels qu'indiqués par l'hébergeur choisi]",
+    // Champs ajoutés pour les CGV (à compléter également)
+    paymentPlatform: "[PLATEFORME DE PAIEMENT, ex. Lemon Squeezy, Paddle, Gumroad ou Stripe]",
+    mediator: "[MÉDIATEUR DE LA CONSOMMATION : nom et site internet]",
+    court: "[VILLE DU TRIBUNAL COMPÉTENT]",
   },
   offers: {
     kit: { launchPrice: 190, regularPrice: 290, launchActive: true, checkoutUrl: "[URL_PAIEMENT_KIT]" },

@@ -1,0 +1,118 @@
+---
+import Page from "../layouts/Page.astro";
+import { site } from "../config";
+import { formatEuro } from "../lib/format";
+import { links } from "../lib/offers";
+
+const { legal, offers } = site;
+---
+
+<Page
+  title="Conditions générales de vente · Coût Réel"
+  description="Conditions générales de vente du kit Coût Réel et des prestations de conseil associées, destinées aux professionnels."
+  heading="Conditions générales de vente"
+  draft
+>
+  <h2>1. Objet</h2>
+  <p>
+    Les présentes conditions générales de vente (CGV) régissent la vente, par {legal.owner} (« le Vendeur »), de contenus
+    numériques (le kit « {site.brand} ») et de prestations de conseil (revue de devis, appel d'offres accompagné)
+    présentés sur le site. Toute commande vaut acceptation sans réserve des présentes CGV.
+  </p>
+
+  <h2>2. Vendeur</h2>
+  <p>
+    {legal.owner}, {legal.status}, SIRET {legal.siret}, {legal.address}. Contact :
+    <a href={links.contact()}>{site.contactEmail}</a>.
+  </p>
+
+  <h2>3. Clients</h2>
+  <p>
+    Les produits et prestations sont destinés aux professionnels, qui agissent pour les besoins de leur activité
+    commerciale, industrielle, artisanale ou libérale. Les dispositions propres aux consommateurs ne s'appliquent que si
+    un consommateur passe commande malgré cette destination (voir article 10).
+  </p>
+
+  <h2>4. Prix et TVA</h2>
+  <p>Les prix sont indiqués en euros, hors taxes (HT) :</p>
+  <ul>
+    <li>
+      Kit {site.brand} : {formatEuro(offers.kit.launchActive ? offers.kit.launchPrice : offers.kit.regularPrice)} HT{
+        offers.kit.launchActive &&
+          ` (prix de lancement pour les 20 premiers acheteurs, puis ${formatEuro(offers.kit.regularPrice)} HT)`
+      } ;
+    </li>
+    <li>Revue de devis : {formatEuro(offers.review.price)} HT, kit inclus ;</li>
+    <li>Appel d'offres accompagné : à partir de {formatEuro(offers.tender.priceFrom)} HT, sur devis.</li>
+  </ul>
+  <p>
+    La TVA applicable est calculée et ajoutée au moment du paiement selon la situation du client. {legal.vat}. Le prix
+    applicable est celui affiché au moment de la commande.
+  </p>
+
+  <h2>5. Commande et paiement</h2>
+  <p>
+    La commande et le paiement s'effectuent sur la page de paiement de {legal.paymentPlatform}, plateforme tierce qui
+    encaisse le paiement, calcule la TVA et émet la facture. Le site lui-même ne collecte aucune donnée de paiement. La
+    commande est ferme dès la confirmation du paiement par la plateforme.
+  </p>
+  <p>
+    Pour l'appel d'offres accompagné, la commande résulte de l'acceptation écrite par le client d'un devis établi par le
+    Vendeur, qui précise le périmètre, le prix et le calendrier.
+  </p>
+
+  <h2>6. Livraison</h2>
+  <p>
+    Le kit est livré par téléchargement : le lien est envoyé par e-mail par la plateforme de paiement dès la
+    confirmation du paiement. En cas de non-réception, le client contacte le Vendeur, qui renvoie le lien.
+  </p>
+  <p>
+    Les prestations de conseil sont réalisées à distance, dans le délai convenu par écrit avec le client. Elles
+    dépendent de la transmission par le client des informations nécessaires (devis reçus, volumes, contrat).
+  </p>
+
+  <h2>7. Licence d'usage</h2>
+  <p>
+    L'achat du kit confère au client une licence d'usage non exclusive et non transférable, limitée à un usage interne à
+    son entreprise. Le client peut adapter les modèles pour ses propres consultations. Il s'interdit de revendre,
+    redistribuer, publier ou mettre à disposition de tiers tout ou partie du kit, à titre gratuit ou onéreux.
+  </p>
+
+  <h2>8. Propriété intellectuelle</h2>
+  <p>
+    Le kit, ses modèles, son simulateur, son guide et ses e-mails restent la propriété exclusive du Vendeur. La vente
+    n'emporte aucune cession de droits de propriété intellectuelle au-delà de la licence décrite à l'article 7.
+  </p>
+
+  <h2>9. Responsabilité</h2>
+  <p>
+    Le kit et les prestations sont des outils d'aide à la décision. Ils ne remplacent ni un conseil juridique, ni un
+    conseil fiscal. Le client reste seul responsable du choix de son prestataire logistique, des chiffres qu'il saisit et
+    des engagements contractuels qu'il signe. Les tarifs donnés en exemple sont fictifs. La responsabilité du Vendeur est
+    limitée au montant payé par le client pour le produit ou la prestation concerné.
+  </p>
+
+  <h2>10. Droit de rétractation</h2>
+  <p>Le droit de rétractation ne s'applique pas aux contrats conclus entre professionnels.</p>
+  <p>
+    Si un consommateur achète le kit, il reconnaît que le contenu numérique lui est fourni immédiatement après le
+    paiement. Conformément à l'article L221-28, 13° du Code de la consommation, il perd son droit de rétractation à
+    condition d'avoir donné son accord exprès à cette exécution immédiate et d'avoir reconnu la perte de ce droit avant
+    de valider sa commande.
+  </p>
+
+  <h2>11. Remboursement</h2>
+  <p>{site.refundPolicy}</p>
+
+  <h2>12. Médiation</h2>
+  <p>
+    En cas de litige, le client adresse d'abord une réclamation écrite au Vendeur, qui s'engage à y répondre. Un
+    consommateur peut recourir gratuitement au médiateur de la consommation suivant : {legal.mediator}.
+  </p>
+
+  <h2>13. Droit applicable et juridiction</h2>
+  <p>
+    Les présentes CGV sont soumises au droit français. À défaut d'accord amiable, tout litige entre professionnels relève
+    de la compétence exclusive des tribunaux de {legal.court}.
+  </p>
+</Page>

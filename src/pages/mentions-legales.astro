@@ -1,0 +1,45 @@
+---
+import Page from "../layouts/Page.astro";
+import { site } from "../config";
+import { links } from "../lib/offers";
+
+const { legal } = site;
+---
+
+<Page
+  title="Mentions légales · Coût Réel"
+  description="Mentions légales du site Coût Réel : éditeur, contact, hébergeur et propriété intellectuelle."
+  heading="Mentions légales"
+  draft
+>
+  <h2>Éditeur du site</h2>
+  <ul>
+    <li><strong>Éditeur</strong> : {legal.owner}</li>
+    <li><strong>Statut</strong> : {legal.status}</li>
+    <li><strong>SIRET</strong> : {legal.siret}</li>
+    <li><strong>Adresse</strong> : {legal.address}</li>
+    <li><strong>TVA</strong> : {legal.vat}</li>
+    <li><strong>Contact</strong> : <a href={links.contact()}>{site.contactEmail}</a></li>
+    <li><strong>Directeur de la publication</strong> : {legal.owner}</li>
+  </ul>
+
+  <h2>Hébergeur</h2>
+  <p>{legal.host}</p>
+
+  <h2>Paiement</h2>
+  <p>
+    Les paiements ne transitent pas par ce site. Ils sont encaissés par {legal.paymentPlatform}, qui émet la facture et
+    livre les fichiers achetés.
+  </p>
+
+  <h2>Propriété intellectuelle</h2>
+  <p>
+    L'ensemble du site (textes, mise en page, marque « {site.brand} », calculateur, illustrations) ainsi que les contenus
+    du kit sont protégés par le droit d'auteur et le droit des marques. Toute reproduction, représentation ou diffusion,
+    totale ou partielle, sans autorisation écrite préalable de l'éditeur est interdite.
+  </p>
+  <p>Les tarifs cités en exemple sur le site sont fictifs et ne constituent pas des prix du marché.</p>
+
+  <h2>Données personnelles</h2>
+  <p>Le traitement des données est décrit dans la <a href="/confidentialite">politique de confidentialité</a>.</p>
+</Page>
