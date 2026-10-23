@@ -1,0 +1,64 @@
+<section class="container author">
+  <div class="avatar" aria-hidden="true">A</div>
+  <div class="bio">
+    <p class="eyebrow">Qui a conçu le kit</p>
+    <h2>Alexis, plus de 10 ans dans les opérations et la supply chain.</h2>
+    <p>
+      J'ai piloté des flux internationaux et du transport, mené des appels d'offres de transitaires et structuré des flux
+      d'import, en PME, en grand groupe, en start-up et en scale-up, dans l'e-commerce, la mode et la joaillerie.
+    </p>
+    <p>
+      Ce kit applique à votre logistique ce qu'un service achats fait pour un grand compte. Je ne suis rémunéré par aucun
+      logisticien : je travaille uniquement pour l'acheteur.
+    </p>
+  </div>
+</section>
+
+<style>
+  .author {
+    padding-top: 88px;
+    padding-bottom: 88px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+  }
+  .avatar {
+    flex: 0 0 auto;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+  }
+  .bio {
+    flex: 999 1 480px;
+    min-width: 0;
+  }
+  h2 {
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: clamp(26px, 5vw, 32px);
+    line-height: 1.15;
+  }
+  p:not(.eyebrow) {
+    margin: 0 0 12px;
+    color: var(--text-2);
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  @media (max-width: 600px) {
+    .author {
+      padding-top: 64px;
+      padding-bottom: 64px;
+      gap: 24px;
+    }
+  }
+</style>

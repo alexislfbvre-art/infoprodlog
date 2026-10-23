@@ -1,0 +1,68 @@
+---
+const steps = [
+  { title: "Votre profil", text: "12 mois de commandes, réceptions, stock et retours." },
+  { title: "La grille imposée", text: "Le même cahier des charges, le même jour, à 3 à 5 logisticiens." },
+  { title: "La simulation", text: "L'année, le pire mois et toute la durée d'engagement." },
+  { title: "Le contrat", text: "20 points vérifiés pour chaque finaliste." },
+  { title: "Négocier, piloter", text: "La structure avant le prix, puis chaque facture contre la simulation." },
+];
+---
+
+<section id="methode" class="container method">
+  <p class="eyebrow">La méthode</p>
+  <h2 class="section-title">5 étapes, de 3 à 5 semaines, jusqu'à la signature.</h2>
+  <ol>
+    {
+      steps.map((step, i) => (
+        <li>
+          <p class="num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</p>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .method {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+  .section-title {
+    margin-bottom: 40px;
+  }
+  ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 20px;
+  }
+  li {
+    border-top: 3px solid var(--accent);
+    padding-top: 16px;
+  }
+  li p {
+    margin: 0;
+    font-size: 15px;
+    color: var(--text-2);
+  }
+  li .num {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--accent);
+  }
+  h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+  }
+  @media (max-width: 600px) {
+    .method {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+  }
+</style>

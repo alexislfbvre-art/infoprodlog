@@ -1,0 +1,99 @@
+---
+const items = [
+  {
+    title: "Le simulateur",
+    text: "8 onglets Excel et Google Sheets : votre profil sur 12 mois, la grille imposée, la simulation mois par mois de 3 offres, le comparatif, le contrat, le pilotage et le journal des incidents.",
+    icon: '<rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M3 15h18M9 3v18"></path>',
+  },
+  {
+    title: "Le cahier des charges",
+    text: "Un modèle Word en 16 sections à envoyer tel quel, avec le format de réponse obligatoire et la grille tarifaire en annexe. Les logisticiens répondent tous dans les mêmes unités.",
+    icon: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6M8 13h8M8 17h5"></path>',
+  },
+  {
+    title: "Le guide de la méthode",
+    text: "13 pages : la méthode en 5 étapes, les 12 coûts cachés, les 20 points de contrat et les 8 leviers de négociation d'un acheteur.",
+    icon: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"></path><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"></path>',
+  },
+  {
+    title: "Les 10 e-mails",
+    text: "De l'invitation à la consultation jusqu'à la revue d'écart après signature, en passant par la demande de variante et la négociation.",
+    icon: '<rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path>',
+  },
+];
+---
+
+<section id="kit" class="kit">
+  <div class="container inner">
+    <p class="eyebrow">Ce que contient le kit</p>
+    <h2 class="section-title">
+      Tout ce qu'un service achats prépare pour un appel d'offres, à la taille d'une marque e-commerce.
+    </h2>
+    <div class="grid">
+      {
+        items.map((item) => (
+          <div class="card">
+            <svg
+              aria-hidden="true"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#0F766E"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              set:html={item.icon}
+            />
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .kit {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .inner {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+  .section-title {
+    margin-bottom: 48px;
+    max-width: 760px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    background: var(--bg);
+  }
+  h3 {
+    margin: 14px 0 8px;
+    font-size: 19px;
+  }
+  p:not(.eyebrow) {
+    margin: 0;
+    color: var(--text-2);
+  }
+  @media (max-width: 600px) {
+    .inner {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+    .section-title {
+      margin-bottom: 32px;
+    }
+  }
+</style>

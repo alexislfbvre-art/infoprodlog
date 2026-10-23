@@ -1,0 +1,102 @@
+---
+import { site } from "../config";
+
+const questions = [
+  {
+    q: "Je n'ai pas encore de logisticien. Le kit me sert-il ?",
+    a: "Oui, c'est même le meilleur moment. Faites une prévision de volumes dans l'onglet Profil et demandez une montée en charge du minimum de facturation sur les premiers mois.",
+  },
+  {
+    q: "Excel ou Google Sheets ?",
+    a: "Les deux. Le fichier est au format .xlsx, sans macro. Dans Google Sheets : Fichier, puis Importer. Il fonctionne aussi dans LibreOffice.",
+  },
+  {
+    q: "Les tarifs de l'exemple sont-ils des prix du marché ?",
+    a: "Non. Ils sont fictifs et servent à montrer le calcul. Vous les remplacez par les réponses de vos logisticiens.",
+  },
+  {
+    q: "Combien de temps faut-il ?",
+    a: "Environ 2 heures pour remplir votre profil et adapter le cahier des charges. Comptez ensuite 3 à 5 semaines de consultation, le temps que les logisticiens répondent.",
+  },
+  {
+    q: "Le kit remplace-t-il un juriste ?",
+    a: "Non. Il vous aide à poser les bonnes questions et à repérer ce qui manque. Pour un engagement important, faites relire le contrat final par un juriste.",
+  },
+  { q: "Et si le kit ne me convient pas ?", a: site.refundPolicy },
+];
+---
+
+<section id="faq" class="faq">
+  <div class="inner">
+    <h2 class="section-title">Questions fréquentes</h2>
+    {
+      questions.map((item) => (
+        <details>
+          <summary>{item.q}</summary>
+          <p>{item.a}</p>
+        </details>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .faq {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+  .inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 88px 24px;
+  }
+  .section-title {
+    margin-bottom: 32px;
+  }
+  details {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+  }
+  details:last-of-type {
+    border-bottom: 0;
+  }
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 18px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary::after {
+    content: "+";
+    flex: 0 0 auto;
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+  details[open] summary::after {
+    content: "−";
+  }
+  p {
+    margin: 12px 0 0;
+    color: var(--text-2);
+  }
+  @media (max-width: 600px) {
+    .inner {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+    summary {
+      font-size: 17px;
+    }
+  }
+</style>

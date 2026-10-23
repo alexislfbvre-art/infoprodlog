@@ -1,0 +1,47 @@
+---
+import { site } from "../config";
+import { links } from "../lib/offers";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="container site-footer">
+  <p>© {year} {site.brand} · {site.legal.owner} · {site.legal.siret}</p>
+  <nav aria-label="Informations légales">
+    <a href="/mentions-legales">Mentions légales</a>
+    <a href="/cgv">CGV</a>
+    <a href="/confidentialite">Confidentialité</a>
+    <a href={links.contact()}>Contact</a>
+  </nav>
+</footer>
+
+<style>
+  .site-footer {
+    padding-top: 32px;
+    padding-bottom: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    color: var(--text-3);
+  }
+  p {
+    margin: 0;
+  }
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 20px;
+  }
+  a {
+    color: var(--text-3);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  a:hover {
+    color: var(--ink);
+  }
+</style>

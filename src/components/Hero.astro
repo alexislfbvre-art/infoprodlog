@@ -1,0 +1,189 @@
+---
+import { site } from "../config";
+import { formatEuro } from "../lib/format";
+import { kitPriceLabel, links } from "../lib/offers";
+
+const { kit } = site.offers;
+const rows = [
+  { name: "Logisticien A", price: formatEuro(2, 2), real: formatEuro(9.79, 2), best: true },
+  { name: "Logisticien B", price: formatEuro(3, 2), real: formatEuro(11.04, 2) },
+  { name: "Logisticien C", price: formatEuro(2.4, 2), real: null },
+];
+---
+
+<section id="top" class="container hero">
+  <div class="hero-copy">
+    <p class="eyebrow hero-eyebrow">Pour les marques e-commerce qui choisissent un logisticien</p>
+    <h1>Le devis dit 2&nbsp;€ par commande. Le vrai coût, c'est 6,15&nbsp;€.</h1>
+    <p class="lead">
+      Le kit d'un acheteur professionnel pour comparer vos logisticiens sur un vrai coût par commande, mois creux et pics
+      compris, et signer un contrat qui vous protège.
+    </p>
+    <div class="actions">
+      <a href={links.kit()} class="btn btn-primary">Obtenir le kit · {kitPriceLabel} HT</a>
+      <a href="#calculateur" class="btn btn-outline">Tester mon devis gratuitement</a>
+    </div>
+    <p class="meta">
+      Excel et Google Sheets · Téléchargement immédiat{
+        kit.launchActive && ` · Prix de lancement pour les 20 premiers acheteurs, puis ${formatEuro(kit.regularPrice)} HT`
+      }
+    </p>
+  </div>
+
+  <div class="sample">
+    <p class="sample-label">Extrait du comparatif · exemple fictif</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Offre</th>
+            <th scope="col" class="num">Prix affiché</th>
+            <th scope="col" class="num">Coût réel / cde</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr>
+                <td>{row.name}</td>
+                <td class="num">{row.price}</td>
+                <td class:list={["num", row.real && "strong", row.best && "best"]}>
+                  {row.real ?? <span class="tag">À compléter</span>}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+    <p class="sample-note">
+      Coût réel = logistique et transport, sur 12 mois de volumes, minimum de facturation compris. L'offre C reste non
+      classée tant que ses frais de sortie ne sont pas écrits.
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-top: 88px;
+    padding-bottom: 72px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-copy {
+    flex: 999 1 520px;
+    min-width: 0;
+  }
+  .hero-eyebrow {
+    margin-bottom: 18px;
+  }
+  h1 {
+    margin: 0 0 24px;
+    font-family: var(--font-display);
+    font-size: clamp(38px, 9vw, 58px);
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+  .lead {
+    margin: 0 0 32px;
+    font-size: 20px;
+    color: var(--text-2);
+    max-width: 560px;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .meta {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-3);
+  }
+  .sample {
+    flex: 1 1 380px;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+  }
+  .sample-label {
+    margin: 0 0 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .table-wrap {
+    overflow-x: auto;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  th {
+    text-align: left;
+    padding: 10px 8px;
+    border-bottom: 2px solid var(--ink);
+    font-weight: 600;
+  }
+  td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .num {
+    text-align: right;
+  }
+  .strong {
+    font-weight: 700;
+  }
+  .best {
+    color: var(--accent);
+  }
+  .tag {
+    background: var(--alert-bg);
+    color: var(--alert-ink);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .sample-note {
+    margin: 16px 0 0;
+    font-size: 14px;
+    color: var(--text-3);
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding-top: 56px;
+      padding-bottom: 56px;
+      gap: 40px;
+    }
+    .lead {
+      font-size: 18px;
+    }
+    .sample {
+      padding: 20px;
+    }
+    table {
+      font-size: 14px;
+    }
+    th,
+    td {
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+  }
+</style>

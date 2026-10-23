@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import Problem from "../components/Problem.astro";
+import Calculator from "../components/Calculator.astro";
+import KitContents from "../components/KitContents.astro";
+import Method from "../components/Method.astro";
+import Fit from "../components/Fit.astro";
+import Offers from "../components/Offers.astro";
+import Author from "../components/Author.astro";
+import Faq from "../components/Faq.astro";
+import FinalCta from "../components/FinalCta.astro";
+import { site } from "../config";
+import { isPlaceholder, kitPrice } from "../lib/offers";
+
+const title = "Coût Réel · Comparez vos devis de logisticien e-commerce";
+const description =
+  "Le kit d'un acheteur pro pour comparer vos logisticiens sur un vrai coût par commande, mois creux et pics compris, et signer un contrat qui vous protège.";
+
+const { kit } = site.offers;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: "Kit Coût Réel",
+  description:
+    "Kit pour choisir un logisticien e-commerce : simulateur Excel et Google Sheets, cahier des charges Word, guide de la méthode et 10 e-mails. Prix HT, hors TVA.",
+  image: new URL("/og.png", Astro.site).href,
+  brand: { "@type": "Brand", name: site.brand },
+  offers: {
+    "@type": "Offer",
+    price: kitPrice.toFixed(2),
+    priceCurrency: "EUR",
+    description: `${kitPrice} € HT, hors TVA. Téléchargement immédiat.`,
+    availability: "https://schema.org/InStock",
+    url: isPlaceholder(kit.checkoutUrl) ? new URL("/#offres", Astro.site).href : kit.checkoutUrl,
+    seller: { "@type": "Person", name: "Alexis" },
+  },
+};
+---
+
+<Base title={title} description={description} home jsonLd={jsonLd}>
+  <Hero />
+  <Problem />
+  <Calculator />
+  <KitContents />
+  <Method />
+  <Fit />
+  <Offers />
+  <Author />
+  <Faq />
+  <FinalCta />
+</Base>

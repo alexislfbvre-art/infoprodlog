@@ -1,0 +1,194 @@
+---
+import { calculate, DEFAULT_INPUTS, formatResult, verdict } from "../lib/calculator";
+
+const fields = [
+  { id: "c-orders", key: "orders", label: "Commandes dans le mois", min: 1, step: 1, mode: "numeric" },
+  { id: "c-items", key: "itemsPerOrder", label: "Articles par commande (moyenne)", min: 1, step: 0.1, mode: "decimal" },
+  { id: "c-price", key: "price", label: "Prix affiché par commande (€ HT)", min: 0, step: 0.1, mode: "decimal" },
+  { id: "c-extra", key: "extraItemPrice", label: "Prix d'un article supplémentaire (€ HT)", min: 0, step: 0.1, mode: "decimal" },
+  { id: "c-other", key: "otherMonthlyFees", label: "Stockage, réception et frais fixes du mois (€ HT)", min: 0, step: 50, mode: "decimal" },
+  { id: "c-min", key: "monthlyMinimum", label: "Minimum de facturation mensuel (€ HT)", min: 0, step: 100, mode: "decimal" },
+] as const;
+
+// Résultats des valeurs par défaut, rendus au build : la page reste juste sans JavaScript.
+const result = calculate(DEFAULT_INPUTS);
+const shown = formatResult(result);
+const text = verdict(DEFAULT_INPUTS, result);
+---
+
+<section id="calculateur" class="container calc">
+  <div class="intro">
+    <p class="eyebrow">Calculateur gratuit</p>
+    <h2 class="section-title">Combien vous coûte vraiment une commande en mois creux&nbsp;?</h2>
+    <p class="text-2">
+      Reprenez les chiffres d'un devis que vous avez reçu. Le calcul applique le minimum de facturation, comme le ferait
+      votre facture.
+    </p>
+    <p class="small">
+      Version simplifiée, hors transport. Le simulateur du kit fait le même calcul sur 12 mois, pour trois offres, avec
+      réception, stockage, retours et majorations de pic.
+    </p>
+  </div>
+
+  <div class="panel" data-calculator>
+    <div class="fields">
+      {
+        fields.map((f) => (
+          <div class="field">
+            <label for={f.id}>{f.label}</label>
+            <input
+              id={f.id}
+              name={f.key}
+              data-key={f.key}
+              type="number"
+              min={f.min}
+              step={f.step}
+              inputmode={f.mode}
+              value={String(DEFAULT_INPUTS[f.key])}
+            />
+          </div>
+        ))
+      }
+    </div>
+    <div class="results" aria-live="polite">
+      <div>
+        <p class="result-label">Coût réel par commande</p>
+        <p class="result-value accent"><span data-out="perOrder">{shown.perOrder}</span>&nbsp;€</p>
+      </div>
+      <div>
+        <p class="result-label">Par rapport au prix affiché</p>
+        <p class="result-value">×&nbsp;<span data-out="ratio">{shown.ratio}</span></p>
+      </div>
+      <div>
+        <p class="result-label">Payé au titre du minimum, sans prestation</p>
+        <p class="result-value alert"><span data-out="wasted">{shown.wasted}</span>&nbsp;€</p>
+      </div>
+    </div>
+    <p class="verdict" data-out="verdict">{text}</p>
+  </div>
+</section>
+
+<script>
+  import { calculate, formatResult, verdict, type CalculatorInputs } from "../lib/calculator";
+
+  const root = document.querySelector<HTMLElement>("[data-calculator]");
+  if (root) {
+    const inputs = Array.from(root.querySelectorAll<HTMLInputElement>("input[data-key]"));
+    const out = (name: string) => root.querySelector<HTMLElement>(`[data-out="${name}"]`)!;
+    const update = () => {
+      const values = Object.fromEntries(inputs.map((i) => [i.dataset.key, i.value])) as unknown as CalculatorInputs;
+      const result = calculate(values);
+      const shown = formatResult(result);
+      out("perOrder").textContent = shown.perOrder;
+      out("ratio").textContent = shown.ratio;
+      out("wasted").textContent = shown.wasted;
+      out("verdict").textContent = verdict(values, result);
+    };
+    root.addEventListener("input", update);
+    update();
+  }
+</script>
+
+<style>
+  .calc {
+    padding-top: 88px;
+    padding-bottom: 88px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    align-items: flex-start;
+  }
+  .intro {
+    flex: 1 1 360px;
+    min-width: 0;
+  }
+  .text-2 {
+    margin: 0 0 16px;
+    color: var(--text-2);
+  }
+  .small {
+    margin: 0;
+    font-size: 15px;
+    color: var(--text-3);
+  }
+  .panel {
+    flex: 999 1 520px;
+    min-width: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 28px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  label {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  input {
+    font: inherit;
+    font-size: 17px;
+    padding: 12px 14px;
+    border: 1.5px solid var(--input-border);
+    border-radius: 8px;
+    min-height: 48px;
+    width: 100%;
+    background: var(--input-bg);
+    color: var(--ink);
+  }
+  input:hover {
+    border-color: var(--text-3);
+  }
+  .results {
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+  .result-label {
+    margin: 0 0 4px;
+    font-size: 14px;
+    color: var(--text-3);
+  }
+  .result-value {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.1;
+  }
+  .accent {
+    color: var(--accent);
+  }
+  .alert {
+    color: var(--alert);
+  }
+  .verdict {
+    margin: 20px 0 0;
+    font-size: 15px;
+    color: var(--text-2);
+  }
+  @media (max-width: 600px) {
+    .calc {
+      padding-top: 64px;
+      padding-bottom: 64px;
+      gap: 32px;
+    }
+    .panel {
+      padding: 20px;
+    }
+    .result-value {
+      font-size: 38px;
+    }
+  }
+</style>
