@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.netlify/
+test-results/
+playwright-report/
+.env
+.env.*
+.DS_Store
+# Fichiers vendus : jamais dans le site ni dans le dépôt public
+produit/
