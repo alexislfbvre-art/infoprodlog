@@ -1,8 +1,16 @@
 # Coût Réel : site de vente
 
-Site statique (Astro + TypeScript) du kit « Coût Réel ». Le site ne gère ni paiement, ni compte client, ni fichier : chaque bouton d'achat renvoie vers la page de paiement de la plateforme choisie (Lemon Squeezy, Paddle, Gumroad ou lien Stripe), qui encaisse, gère la TVA, facture et livre le fichier.
+Site statique (Astro + TypeScript) du kit « Coût Réel ». Le site ne gère ni paiement, ni compte client, ni fichier : chaque bouton d'achat renvoie vers la page de paiement de la plateforme choisie (Gumroad au lancement ; Lemon Squeezy, Paddle ou un lien Stripe restent possibles), qui encaisse, gère la TVA, facture et livre le fichier.
 
 **Tout se règle dans un seul fichier : `src/config.ts`.**
+
+## Mise en vente : les 3 gestes
+
+1. **Remplir `src/config.ts`** directement sur GitHub (icône crayon, puis *Commit changes*) : identité légale, e-mail, lien Gumroad du kit, domaine.
+2. **Fusionner la branche de travail dans `main`**, puis importer le dépôt dans Vercel (*Add New… > Project*).
+3. **Vérifier** : la page d'accueil, un clic sur « Acheter le kit » qui ouvre bien Gumroad, et les pages légales sans crochets.
+
+Garde-fou : sur Vercel, un déploiement de **production** échoue tant qu'un champ légal, l'e-mail, le domaine ou le lien de paiement du kit contient encore un crochet. Le message d'erreur du build liste les champs manquants. Les déploiements d'**aperçu** ne sont pas bloqués.
 
 ## Changer un prix, une URL ou terminer le prix de lancement
 
