@@ -1,0 +1,59 @@
+---
+import Page from "../layouts/Page.astro";
+import { site } from "../config";
+import { links } from "../lib/offers";
+
+const plausible = site.analytics.plausibleDomain;
+---
+
+<Page
+  title="Politique de confidentialité · Coût Réel"
+  description="Le site Coût Réel ne collecte aucune donnée personnelle et ne dépose aucun cookie. Le paiement est géré par une plateforme tierce."
+  heading="Politique de confidentialité"
+  draft
+>
+  <h2>Ce que le site collecte</h2>
+  <p>
+    Rien. Le site ne comporte ni formulaire, ni compte client, ni cookie. Le calculateur fonctionne entièrement dans votre
+    navigateur : les chiffres que vous saisissez ne sont ni envoyés ni enregistrés.
+  </p>
+  <p>
+    L'hébergeur du site (voir les <a href="/mentions-legales">mentions légales</a>) peut conserver des journaux
+    techniques (adresse IP, date, page demandée) nécessaires à la sécurité et au fonctionnement du service.
+  </p>
+
+  <h2>Mesure d'audience</h2>
+  {
+    plausible ? (
+      <p>
+        Le site utilise Plausible Analytics, un outil de mesure d'audience sans cookie qui ne collecte aucune donnée
+        personnelle et ne permet pas de vous suivre d'un site à l'autre. Les statistiques sont agrégées et anonymes.
+      </p>
+    ) : (
+      <p>Le site n'utilise aucun outil de mesure d'audience.</p>
+    )
+  }
+
+  <h2>Paiement</h2>
+  <p>
+    Lorsque vous achetez, vous êtes redirigé vers {site.legal.paymentPlatform}. Vos coordonnées et vos données de paiement
+    sont collectées et traitées par cette plateforme, selon sa propre politique de confidentialité. L'éditeur reçoit les
+    informations nécessaires à la facturation et au suivi de la commande (nom, e-mail, société, produit acheté).
+  </p>
+
+  <h2>Contact par e-mail</h2>
+  <p>
+    Si vous écrivez à <a href={links.contact()}>{site.contactEmail}</a>, votre message est utilisé uniquement pour vous
+    répondre et n'est transmis à aucun tiers.
+  </p>
+
+  <h2>Vos droits</h2>
+  <p>
+    Vous disposez d'un droit d'accès, de rectification, d'effacement et d'opposition sur vos données. Pour l'exercer,
+    écrivez à <a href={links.contact()}>{site.contactEmail}</a>. Vous pouvez aussi adresser une réclamation à la CNIL
+    (cnil.fr).
+  </p>
+
+  <h2>Responsable du traitement</h2>
+  <p>{site.legal.owner}, {site.legal.address}.</p>
+</Page>

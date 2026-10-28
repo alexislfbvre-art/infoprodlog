@@ -1,0 +1,147 @@
+---
+import { site } from "../config";
+import { formatEuro } from "../lib/format";
+import { kitPriceLabel, launchNotice, links } from "../lib/offers";
+
+const { kit, review, tender } = site.offers;
+---
+
+<section id="offres" class="offers">
+  <div class="container inner">
+    <p class="eyebrow">Prix</p>
+    <h2 class="section-title">Faites-le vous-même, ou faites-le avec moi.</h2>
+    <p class="intro">Prix affichés, sans appel commercial. Montants HT, facture fournie.</p>
+    <div class="grid">
+      <div class="offer featured">
+        <p class="name accent">Le kit</p>
+        <p class="price">{kitPriceLabel} <span class="unit">HT</span></p>
+        {kit.launchActive && <p class="note">{launchNotice}</p>}
+        <ul>
+          <li>Simulateur 8 onglets</li>
+          <li>Cahier des charges Word</li>
+          <li>Guide de la méthode, 13 pages</li>
+          <li>10 e-mails prêts à envoyer</li>
+          <li>Mises à jour de la version 1</li>
+        </ul>
+        <a href={links.kit()} class="btn btn-primary">Acheter le kit</a>
+      </div>
+
+      <div class="offer">
+        <p class="name">La revue de vos devis</p>
+        <p class="price">{formatEuro(review.price)} <span class="unit">HT</span></p>
+        <p class="note">Le kit est inclus.</p>
+        <ul>
+          <li>Jusqu'à 3 devis simulés sur votre profil</li>
+          <li>Les lignes floues et les questions à poser</li>
+          <li>Les 3 leviers de négociation prioritaires</li>
+          <li>1 h de restitution en visio</li>
+        </ul>
+        <a href={links.review()} class="btn btn-dark">Réserver une revue</a>
+      </div>
+
+      <div class="offer">
+        <p class="name">L'appel d'offres accompagné</p>
+        <p class="price"><span class="unit">dès</span> {formatEuro(tender.priceFrom)} <span class="unit">HT</span></p>
+        <p class="note">Sur devis, selon le nombre de logisticiens consultés.</p>
+        <ul>
+          <li>Cahier des charges rédigé avec vous</li>
+          <li>Consultation menée de bout en bout</li>
+          <li>Négociation et relecture des points de contrat</li>
+          <li>Mise en place du pilotage mensuel</li>
+        </ul>
+        <a href={links.tender()} class="btn btn-dark">En parler 20 minutes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .offers {
+    background: var(--offers-bg);
+    border-top: 1px solid var(--offers-border);
+  }
+  .inner {
+    padding-top: 88px;
+    padding-bottom: 88px;
+  }
+  .section-title {
+    margin-bottom: 12px;
+  }
+  .intro {
+    margin: 0 0 48px;
+    color: var(--text-2);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 24px;
+    align-items: stretch;
+  }
+  .offer {
+    background: var(--surface);
+    border: 1px solid var(--offers-border);
+    border-radius: 16px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .featured {
+    border: 2px solid var(--accent);
+  }
+  .offer p {
+    margin: 0;
+  }
+  .name {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-3);
+  }
+  .name.accent {
+    color: var(--accent);
+  }
+  .price {
+    font-family: var(--font-display);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .unit {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-3);
+  }
+  .note {
+    font-size: 14px;
+    color: var(--text-3);
+  }
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-2);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex-grow: 1;
+  }
+  .btn {
+    padding: 14px 20px;
+  }
+  @media (max-width: 600px) {
+    .inner {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+    .intro {
+      margin-bottom: 32px;
+    }
+    .offer {
+      padding: 24px;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,52 @@
+---
+import { kitPriceLabel, links } from "../lib/offers";
+---
+
+<section class="final">
+  <div class="container inner">
+    <h2>Votre prochain contrat logistique vous engage pour au moins un an. Comparez-le sur le vrai coût.</h2>
+    <a href={links.kit()} class="btn cta">Obtenir le kit · {kitPriceLabel} HT</a>
+  </div>
+</section>
+
+<style>
+  .final {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .inner {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  h2 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5.6vw, 36px);
+    line-height: 1.15;
+    max-width: 640px;
+  }
+  .cta {
+    background: var(--accent-light);
+    color: var(--accent-light-ink);
+    padding: 16px 28px;
+    font-weight: 700;
+  }
+  .cta:focus-visible {
+    outline-color: var(--accent-light);
+  }
+  .cta:hover {
+    background: #9ddcd2;
+    color: var(--accent-light-ink);
+  }
+  @media (max-width: 600px) {
+    .inner {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+  }
+</style>

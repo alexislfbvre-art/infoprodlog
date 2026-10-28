@@ -1,0 +1,225 @@
+---
+import "@fontsource/inter/latin-400.css";
+import "@fontsource/inter/latin-500.css";
+import "@fontsource/inter/latin-600.css";
+import "@fontsource/inter/latin-700.css";
+import "@fontsource/inter-tight/latin-600.css";
+import "@fontsource/inter-tight/latin-700.css";
+import interRegular from "@fontsource/inter/files/inter-latin-400-normal.woff2?url";
+import interTightBold from "@fontsource/inter-tight/files/inter-tight-latin-700-normal.woff2?url";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { site } from "../config";
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+  home?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, noindex = false, home = false, jsonLd } = Astro.props;
+const path = Astro.url.pathname.replace(/(\/index)?(\.html)?$/, "") || "/";
+const canonical = new URL(path, Astro.site);
+const ogImage = new URL("/og.png", Astro.site);
+const plausible = site.analytics.plausibleDomain;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical.href} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#1F2A44" />
+    <link rel="preload" href={interTightBold} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interRegular} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content={site.brand} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Le devis dit 2 € par commande. Le vrai coût, c'est 6,15 €." />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {plausible && <script defer data-domain={plausible} src="https://plausible.io/js/script.js" />}
+    <script is:inline>document.documentElement.classList.add("js");</script>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <Header home={home} />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --ink: #1f2a44;
+    --accent: #0f766e;
+    --accent-hover: #0b5a54;
+    --accent-light: #7fd1c5;
+    --accent-light-ink: #12302c;
+    --bg: #f7f7f4;
+    --surface: #ffffff;
+    --offers-bg: #eef4f2;
+    --offers-border: #d6e6e2;
+    --alert: #b54708;
+    --alert-bg: #feebc8;
+    --alert-ink: #7a3e00;
+    --text-2: #3d4760;
+    --text-3: #5b6478;
+    --border: #e4e2da;
+    --dark-border: #3a4663;
+    --dark-text: #c9cfdb;
+    --input-border: #c9cdd6;
+    --input-bg: #fffdf5;
+    --font-body: Inter, system-ui, sans-serif;
+    --font-display: "Inter Tight", Inter, system-ui, sans-serif;
+    --container: 1168px; /* 1120 px de contenu + 2 × 24 px de marge */
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-wrap: break-word;
+  }
+
+  a {
+    color: var(--accent);
+  }
+  a:hover {
+    color: var(--accent-hover);
+  }
+
+  input:focus-visible,
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 16px;
+    top: -100px;
+    z-index: 10;
+    padding: 12px 16px;
+    background: var(--ink);
+    color: #fff;
+    border-radius: 8px;
+  }
+  .skip-link:focus {
+    top: 12px;
+    color: #fff;
+  }
+
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .eyebrow {
+    margin: 0 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .section-title {
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: clamp(30px, 6.2vw, 40px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 15px 26px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 17px;
+    text-decoration: none;
+    text-align: center;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    color: #fff;
+  }
+  .btn-dark {
+    background: var(--ink);
+    color: #fff;
+  }
+  .btn-dark:hover {
+    background: #2c3a5c;
+    color: #fff;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn-outline:hover {
+    color: var(--ink);
+    background: rgba(31, 42, 68, 0.06);
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>

@@ -1,0 +1,42 @@
+---
+import Page from "../layouts/Page.astro";
+import { site } from "../config";
+import { formatEuro } from "../lib/format";
+import { links } from "../lib/offers";
+---
+
+<Page
+  title="Merci pour votre achat · Coût Réel"
+  description="Votre kit Coût Réel : où trouver le fichier, comment l'ouvrir dans Excel ou Google Sheets, et comment nous contacter."
+  heading="Merci, votre commande est confirmée."
+  eyebrow="Kit Coût Réel"
+  noindex
+>
+  <h2>Où trouver votre kit</h2>
+  <p>
+    Vous allez recevoir un e-mail de {site.legal.paymentPlatform}, la plateforme de paiement, avec le lien de
+    téléchargement et votre facture. Il arrive en général en quelques minutes.
+  </p>
+  <p>Vous ne le trouvez pas ? Vérifiez vos courriers indésirables, puis écrivez-moi : je vous renvoie le lien.</p>
+
+  <h2>Comment ouvrir le simulateur</h2>
+  <ul>
+    <li><strong>Excel</strong> : ouvrez directement le fichier .xlsx. Il ne contient aucune macro.</li>
+    <li><strong>Google Sheets</strong> : dans un tableur vide, choisissez Fichier &gt; Importer, puis sélectionnez le fichier .xlsx.</li>
+    <li><strong>LibreOffice</strong> : le fichier s'ouvre aussi tel quel.</li>
+  </ul>
+  <p>Commencez par l'onglet Profil : il faut environ 2 heures pour le remplir et adapter le cahier des charges.</p>
+
+  <h2>Besoin d'un regard extérieur sur vos devis ?</h2>
+  <p>
+    La revue de devis ({formatEuro(site.offers.review.price)} HT) simule jusqu'à 3 devis sur votre profil, repère les lignes
+    floues et les 3 leviers de négociation prioritaires, avec 1 h de restitution en visio.
+  </p>
+  <div class="actions">
+    <a href={links.review()} class="btn btn-dark">Réserver une revue</a>
+    <a href={links.contact()} class="btn btn-outline">Me contacter</a>
+  </div>
+
+  <h2>Contact</h2>
+  <p>Une question sur le kit ou votre facture : <a href={links.contact()}>{site.contactEmail}</a>.</p>
+</Page>

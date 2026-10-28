@@ -1,0 +1,94 @@
+---
+const cards = [
+  {
+    figure: "×3",
+    title: "Chacun ses unités",
+    text: "Par palette, par carton, par article, par mois. Le « 2 € par commande » de l'exemple devient 6,15 € de logistique une fois tout appliqué.",
+  },
+  {
+    figure: "1 556 €",
+    title: "Les mois creux",
+    text: "Un minimum de facturation se paie quand vos volumes baissent. Dans l'exemple, 3 mois creux coûtent 1 556 € pour rien.",
+  },
+  {
+    figure: "20",
+    title: "Ce qui n'est pas écrit",
+    text: "Erreurs, casse, indexation, frais de sortie : 20 points de contrat à vérifier avant de signer, pas après.",
+  },
+];
+---
+
+<section id="probleme" class="problem">
+  <div class="container inner">
+    <h2 class="section-title">Deux devis de logisticien ne se comparent jamais tels quels.</h2>
+    <p class="lead">
+      Un devis, c'est 10 à 15 lignes, chacune dans son unité. Tant qu'on ne les applique pas à vos volumes, mois par mois,
+      on compare des slogans.
+    </p>
+    <div class="cards">
+      {
+        cards.map((card) => (
+          <div class="card">
+            <p class="figure">{card.figure}</p>
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .problem {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .inner {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .section-title {
+    max-width: 760px;
+  }
+  .lead {
+    margin: 0 0 48px;
+    font-size: 19px;
+    color: var(--dark-text);
+    max-width: 720px;
+  }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+  .card {
+    border: 1px solid var(--dark-border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .card p {
+    margin: 0;
+    color: var(--dark-text);
+  }
+  .card .figure {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: 44px;
+    font-weight: 700;
+    color: var(--accent-light);
+  }
+  h3 {
+    margin: 0 0 8px;
+    font-size: 19px;
+  }
+  @media (max-width: 600px) {
+    .inner {
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+    .lead {
+      font-size: 18px;
+    }
+  }
+</style>

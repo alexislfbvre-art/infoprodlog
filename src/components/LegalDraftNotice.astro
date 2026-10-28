@@ -1,0 +1,18 @@
+{
+  import.meta.env.DEV && (
+    <div class="draft" role="note">
+      <strong>Brouillon à faire valider par un juriste.</strong> Cet encadré n'apparaît qu'en développement.
+    </div>
+  )
+}
+
+<style>
+  .draft {
+    margin: 0 0 32px;
+    padding: 16px 20px;
+    border: 2px solid var(--alert);
+    border-radius: 10px;
+    background: var(--alert-bg);
+    color: var(--alert-ink);
+  }
+</style>

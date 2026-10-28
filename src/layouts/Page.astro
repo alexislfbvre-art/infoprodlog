@@ -1,0 +1,82 @@
+---
+import Base from "./Base.astro";
+import LegalDraftNotice from "../components/LegalDraftNotice.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  heading: string;
+  eyebrow?: string;
+  noindex?: boolean;
+  draft?: boolean;
+  updated?: string;
+}
+
+const { title, description, heading, eyebrow, noindex = false, draft = false, updated } = Astro.props;
+---
+
+<Base title={title} description={description} noindex={noindex}>
+  <article class="page">
+    {draft && <LegalDraftNotice />}
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1>{heading}</h1>
+    {updated && <p class="updated">Dernière mise à jour : {updated}</p>}
+    <slot />
+  </article>
+</Base>
+
+<style>
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 72px 24px 88px;
+  }
+  h1 {
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: clamp(32px, 7vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .updated {
+    margin: 0 0 32px;
+    font-size: 14px;
+    color: var(--text-3);
+  }
+  .page :global(h2) {
+    margin: 40px 0 12px;
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.2;
+  }
+  .page :global(p),
+  .page :global(li) {
+    color: var(--text-2);
+  }
+  .page :global(p) {
+    margin: 0 0 14px;
+  }
+  .page :global(ul),
+  .page :global(ol) {
+    margin: 0 0 14px;
+    padding-left: 22px;
+  }
+  .page :global(li + li) {
+    margin-top: 6px;
+  }
+  .page :global(strong) {
+    color: var(--ink);
+  }
+  .page :global(.actions) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 24px 0;
+  }
+  @media (max-width: 600px) {
+    .page {
+      padding-top: 48px;
+      padding-bottom: 64px;
+    }
+  }
+</style>

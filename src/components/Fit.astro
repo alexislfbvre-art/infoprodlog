@@ -1,0 +1,60 @@
+---
+const forYou = [
+  "Vous expédiez vous-même et vous préparez le passage à un logisticien.",
+  "Votre contrat actuel arrive à échéance et vous voulez remettre en concurrence.",
+  "Vous avez reçu des devis et vous n'arrivez pas à les comparer.",
+  "Votre facture logistique dépasse ce que vous aviez prévu.",
+];
+const notForYou = [
+  "Vous expédiez quelques dizaines de colis par mois : un logisticien n'est sans doute pas encore rentable.",
+  "Vous cherchez un annuaire de logisticiens : le kit vous aide à choisir, il ne vous en présente pas.",
+  "Vous attendez un avis juridique sur votre contrat : faites-le relire par un juriste.",
+];
+---
+
+<section class="container fit">
+  <div class="box">
+    <h2>Pour vous si…</h2>
+    <ul>{forYou.map((item) => <li>{item}</li>)}</ul>
+  </div>
+  <div class="box">
+    <h2>Pas pour vous si…</h2>
+    <ul>{notForYou.map((item) => <li>{item}</li>)}</ul>
+  </div>
+</section>
+
+<style>
+  .fit {
+    padding-bottom: 88px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  h2 {
+    margin: 0 0 16px;
+    font-size: 22px;
+  }
+  ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--text-2);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  @media (max-width: 600px) {
+    .fit {
+      padding-bottom: 64px;
+      grid-template-columns: 1fr;
+    }
+    .box {
+      padding: 24px;
+    }
+  }
+</style>
